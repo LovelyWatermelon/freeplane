@@ -52,7 +52,7 @@ class FormulaTextTransformer extends AbstractContentTransformer implements IEdit
 //                    + plainText.substring(1) + "'");
 //        }
 //        return result;
-		return null;
+		return plainText;
     }
 
     public boolean isFormula(TextController textController, final Object obj, final NodeModel node,
