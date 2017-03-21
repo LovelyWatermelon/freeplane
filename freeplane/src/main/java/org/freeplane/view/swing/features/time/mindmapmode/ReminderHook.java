@@ -57,7 +57,6 @@ import org.freeplane.features.mode.Controller;
 import org.freeplane.features.mode.ModeController;
 import org.freeplane.features.mode.NodeHookDescriptor;
 import org.freeplane.features.mode.PersistentNodeHook;
-import org.freeplane.features.script.IScriptStarter;
 import org.freeplane.features.text.TextController;
 import org.freeplane.n3.nanoxml.XMLElement;
 import org.freeplane.view.swing.features.time.mindmapmode.TimeManagement.JTimePanel;
@@ -343,15 +342,11 @@ public class ReminderHook extends PersistentNodeHook implements IExtension {
 		final String script = reminderExtension.getScript();
 		if(script == null || script.equals(""))
 			return;
-		final IScriptStarter starter = (IScriptStarter) modeController.getExtension(IScriptStarter.class);
-		if(starter == null)
-			return;
 		final NodeModel node = reminderExtension.getNode();
 		final MapModel map = node.getMap();
 		final Controller controller = modeController.getController();
 		if(! controller.getMapViewManager().getMaps(modeController.getModeName()).containsValue(map))
 			return;
-		starter.executeScript(node, script);
     }
 	/**
 	 * @author Dimitry

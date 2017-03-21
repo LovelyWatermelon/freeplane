@@ -73,7 +73,6 @@ import org.freeplane.features.map.NodeChangeEvent;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
 import org.freeplane.features.mode.ModeController;
-import org.freeplane.features.script.IScriptEditorStarter;
 import org.freeplane.features.text.TextController;
 import org.freeplane.features.text.mindmapmode.MTextController;
 
@@ -86,7 +85,7 @@ import com.jgoodies.forms.layout.FormLayout;
  */
 class TimeManagement implements PropertyChangeListener, IMapSelectionListener {
 
-	class JTimePanel extends JPanel 
+	class JTimePanel extends JPanel
 	{
         private static final long serialVersionUID = 1L;
 		private JButton setReminderButton;
@@ -103,7 +102,7 @@ class TimeManagement implements PropertyChangeListener, IMapSelectionListener {
 	        final NodeModel selected = reminderHook.getModeController().getMapController().getSelectedNode();
 	        update(selected);
         }
-		
+
 		public void update(NodeModel node){
 			if(node == null)
 				return;
@@ -156,7 +155,7 @@ class TimeManagement implements PropertyChangeListener, IMapSelectionListener {
 			calendarComponent.getDayChooser().addPropertyChangeListener(TimeManagement.this);
 			calendarContainer.setAlignmentX(0.5f);
 			add(calendarContainer);
-			
+
 			DefaultFormBuilder btnBuilder = new DefaultFormBuilder(new FormLayout(FormSpecs.GROWING_BUTTON_COLSPEC.toString(), ""));
 			 btnBuilder.getLayout().addGroupedColumn(btnBuilder.getColumnCount());
 			 for(int i = 1; i< colCount; i++){
@@ -195,15 +194,6 @@ class TimeManagement implements PropertyChangeListener, IMapSelectionListener {
 				btnBuilder.append(appendButton);
 			}
 			{
-				scriptEditor = null;
-				IScriptEditorStarter editor = (IScriptEditorStarter) reminderHook.getModeController().getExtension(IScriptEditorStarter.class);
-				if(editor != null){
-					scriptEditor = editor.createComboBoxEditor(new Dimension(600, 400));
-					Component scriptButton = scriptEditor.getEditorComponent();
-					btnBuilder.append(scriptButton);
-				}
-			}
-			{
 				setReminderButton = new JButton(getResourceString("plugins/TimeManagement.xml_reminderButton"));
 				setReminderButton.setToolTipText(getResourceString("plugins/TimeManagement.xml_reminderButton_tooltip"));
 				setReminderButton.addMouseListener(new MouseAdapter() {
@@ -224,7 +214,7 @@ class TimeManagement implements PropertyChangeListener, IMapSelectionListener {
 	                public void mouseClicked(MouseEvent e) {
 						remindLaterReminder();
 	               }
-					
+
 				});
 				btnBuilder.append(remindLaterButton);
 			}
@@ -242,7 +232,7 @@ class TimeManagement implements PropertyChangeListener, IMapSelectionListener {
 	                public void mouseClicked(MouseEvent e) {
 						removeReminder();
 	               }
-					
+
 				});
 				btnBuilder.append(removeReminderButton);
 			}
@@ -325,7 +315,7 @@ class TimeManagement implements PropertyChangeListener, IMapSelectionListener {
 		Controller.getCurrentController().getMapViewManager().addMapSelectionListener(this);
 	}
 
-	
+
 	public void afterMapChange(final MapModel oldMap, final MapModel newMap) {
 	}
 
@@ -380,7 +370,7 @@ class TimeManagement implements PropertyChangeListener, IMapSelectionListener {
 			public void onSelect(NodeModel node) {
 				timePanel.update(node);
 			}
-			
+
 			public void onDeselect(NodeModel node) {
 			}
 		};
@@ -393,7 +383,7 @@ class TimeManagement implements PropertyChangeListener, IMapSelectionListener {
 			}
 		};
 		getMindMapController().getMapController().addNodeChangeListener(nodeChangeListener);
-		
+
 		dialog.setTitle(getResourceString("plugins/TimeManagement.xml_WindowTitle"));
 		dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		dialog.addWindowListener(new WindowAdapter() {
@@ -404,7 +394,7 @@ class TimeManagement implements PropertyChangeListener, IMapSelectionListener {
 		});
 		final Action action = new AbstractAction() {
 			/**
-			 * 
+			 *
 			 */
 			private static final long serialVersionUID = 1L;
 
@@ -418,7 +408,7 @@ class TimeManagement implements PropertyChangeListener, IMapSelectionListener {
 		UITools.setBounds(dialog, -1, -1, dialog.getWidth(), dialog.getHeight());
 		dialog.setVisible(true);
 	}
-	
+
 	public JTimePanel createTimePanel(final Dialog dialog, boolean useTriple, int colCount) {
 		if (this.calendar == null) {
 			this.calendar = Calendar.getInstance();
