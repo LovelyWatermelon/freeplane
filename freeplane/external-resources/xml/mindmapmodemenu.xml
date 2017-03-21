@@ -446,11 +446,11 @@
 			<Entry name="EnterPassword" />
 			<Entry name="RemoveEncryption" />
 			<Entry builder="separator" />
-			<Entry name="ManageAddOnsAction" plugin="org.freeplane.plugin.script" />
+<!--			<Entry name="ManageAddOnsAction" plugin="org.freeplane.plugin.script" />
 			<Entry name="scripting" plugin="org.freeplane.plugin.script" builder="userScripts" />
 			<Entry name="ExecuteScriptForSelectionAction" />
 			<Entry name="ExecuteScriptForAllNodes" />
-			<Entry name="ScriptEditor" />
+			<Entry name="ScriptEditor" />-->
 			<Entry name="formula.EvaluateAllAction" plugin="org.freeplane.plugin.formula" />
 			<Entry builder="separator" />
 			<Entry name="SetAcceleratorOnNextClickAction" />
