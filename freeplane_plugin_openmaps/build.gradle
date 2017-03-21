@@ -2,7 +2,7 @@ targetCompatibility='1.7'
 sourceCompatibility='1.7'
 	
 repositories {
-    maven { url "https://josm.openstreetmap.de/nexus/content/groups/public/" }
+    maven { url "http://josm.openstreetmap.de/nexus/content/groups/public/" }
 }
 
 dependencies {
