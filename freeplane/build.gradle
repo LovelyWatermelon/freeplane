@@ -115,7 +115,6 @@ jar {
                     org.freeplane.features.note,
                     org.freeplane.features.note.mindmapmode,
                     org.freeplane.features.print,
-                    org.freeplane.features.script,
                     org.freeplane.features.spellchecker.mindmapmode,
                     org.freeplane.features.styles,
                     org.freeplane.features.styles.mindmapmode,

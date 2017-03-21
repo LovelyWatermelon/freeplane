@@ -1,6 +1,5 @@
 dependencies {
     compile project(':freeplane')
-    compile project(':freeplane_plugin_script')
 }
 
 jar {
@@ -21,7 +20,6 @@ jar {
 
         def imports = """\
                       org.osgi.framework;version="1.3.0",
-                      org.freeplane.plugin.script.*,
                       org.freeplane.core.*,
                       org.freeplane.features.*,
                       org.freeplane.main.*,

@@ -19,8 +19,8 @@ import org.freeplane.features.text.mindmapmode.EditNodeBase;
 import org.freeplane.features.text.mindmapmode.EditNodeDialog;
 import org.freeplane.features.text.mindmapmode.IEditBaseCreator;
 import org.freeplane.features.text.mindmapmode.MTextController;
-import org.freeplane.plugin.script.ExecuteScriptException;
-import org.freeplane.plugin.script.FormulaUtils;
+//import org.freeplane.plugin.script.ExecuteScriptException;
+//import org.freeplane.plugin.script.FormulaUtils;
 
 class FormulaTextTransformer extends AbstractContentTransformer implements IEditBaseCreator{
 	FormulaTextTransformer(int priority) {
@@ -41,17 +41,18 @@ class FormulaTextTransformer extends AbstractContentTransformer implements IEdit
         if (transformedExtension == node.getUserObject() && textController.isTextFormattingDisabled(node))
             return obj;
         final String text = obj.toString();
-        if (!FormulaUtils.containsFormulaCheckHTML(text)) {
-            return obj;
-        }
+//        if (!FormulaUtils.containsFormulaCheckHTML(text)) {
+//            return obj;
+//        }
         final String plainText = HtmlUtils.htmlToPlain(text);
         // starting a new ScriptContext in evalIfScript
-        final Object result = FormulaUtils.evalIfScript(node, null, plainText);
-        if (result == null) {
-            throw new ExecuteScriptException("got null result from evaluating " + node.getID() + ", text='"
-                    + plainText.substring(1) + "'");
-        }
-        return result;
+//        final Object result = FormulaUtils.evalIfScript(node, null, plainText);
+//        if (result == null) {
+//            throw new ExecuteScriptException("got null result from evaluating " + node.getID() + ", text='"
+//                    + plainText.substring(1) + "'");
+//        }
+//        return result;
+		return null;
     }
 
     public boolean isFormula(TextController textController, final Object obj, final NodeModel node,
@@ -66,9 +67,9 @@ class FormulaTextTransformer extends AbstractContentTransformer implements IEdit
     	if (node != null && transformedExtension == node.getUserObject() && textController.isTextFormattingDisabled(node))
     		return false;
     	final String text = obj.toString();
-    	if (!FormulaUtils.containsFormulaCheckHTML(text)) {
-    		return false;
-    	}
+//    	if (!FormulaUtils.containsFormulaCheckHTML(text)) {
+//    		return false;
+//    	}
     	return true;
     }
     

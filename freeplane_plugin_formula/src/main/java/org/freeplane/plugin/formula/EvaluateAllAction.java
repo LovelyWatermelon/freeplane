@@ -16,7 +16,7 @@ class EvaluateAllAction extends AFreeplaneAction {
 
 	public void actionPerformed(final ActionEvent e) {
 		final MapModel map = Controller.getCurrentController().getMap();
-		org.freeplane.plugin.script.FormulaUtils.clearCache(map);
+//		org.freeplane.plugin.script.FormulaUtils.clearCache(map);
 		MapView mapView = (MapView)Controller.getCurrentController().getMapViewManager().getMapViewComponent();
 		mapView.getRoot().updateAll();
 	}
