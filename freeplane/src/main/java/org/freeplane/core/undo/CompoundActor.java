@@ -19,6 +19,7 @@
  */
 package org.freeplane.core.undo;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -64,6 +65,14 @@ public class CompoundActor implements IActor {
 			return firstDescription + ", " + lastDescription;
 		}
 		return firstDescription + "... " + lastDescription;
+	}
+
+	public String getSimpleDescription() {
+		if (actors.size() == 0)
+			return "";
+		if (actors.size() == 1)
+			return actors.getFirst().getDescription();
+		return actors.get(1).getDescription();
 	}
 
 	public void undo() {

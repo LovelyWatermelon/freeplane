@@ -218,6 +218,20 @@ public class UndoHandler implements IUndoHandler {
 		return description;
 	}
 
+	public ListIterator<CompoundActor> getActorIterator() {
+		return actorList.listIterator() ;
+	}
+
+	public ListIterator<CompoundActor> getActorIteratorUndo() {
+		ActorList actorList = new ActorList();
+		int i = 0;
+		for (; actorIterator.hasNext(); i++)
+			actorList.add(actorIterator.next());
+		for (; i > 0; i--)
+			actorIterator.previous();
+		return actorList.listIterator();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see freeplane.base.undo.UndoHandler#getRedoAction()

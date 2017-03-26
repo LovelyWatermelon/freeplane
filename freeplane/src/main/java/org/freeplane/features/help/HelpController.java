@@ -47,6 +47,7 @@ public class HelpController implements IExtension {
         if(resourceController.isApplet())
             return;
 		controller.addAction(new FilePropertiesAction());
+		controller.addAction(new HistoryAction());
 		controller.addAction(new OpenSourceForgeURLAction("ReportBugAction",  resourceController.getProperty("bugTrackerLocation")));
 		controller.addAction(new OpenSourceForgeURLAction("RequestFeatureAction",  resourceController.getProperty("featureTrackerLocation")));
 		controller.addAction(new OpenSourceForgeURLAction("AskForHelp",  resourceController.getProperty("helpForumLocation")));

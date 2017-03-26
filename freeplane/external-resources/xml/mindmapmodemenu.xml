@@ -232,6 +232,7 @@
 		</Entry>
 		<Entry name="view">
 			<Entry name="NewMapViewAction" />
+			<Entry name="HistoryAction" />
 			<Entry name="toolbars">
 				<Entry name="ToggleMenubarAction" builder="removeOnMac" />
 				<Entry name="ToggleToolbarAction" />
