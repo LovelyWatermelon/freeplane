@@ -32,14 +32,13 @@ import org.freeplane.features.ui.IMapViewChangeListener;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ListIterator;
 
 
-class HistoryAction extends AFreeplaneAction {
+public class HistoryAction extends AFreeplaneAction {
     private static final long serialVersionUID = 1L;
     private static JDialog dialog;
     private static JPanel panel;
@@ -51,7 +50,7 @@ class HistoryAction extends AFreeplaneAction {
     private HistoryChangeListener historyChangeListener = new HistoryChangeListener();
     private HistoryIMapViewChangeListener historyIMapViewChangeListener;
 
-    HistoryAction() {
+    public HistoryAction() {
         super("HistoryAction");
     }
 
@@ -112,7 +111,7 @@ class HistoryAction extends AFreeplaneAction {
         update();
     }
 
-    private void setButtonUndo(JButton button) {
+    public static void setButtonUndo(JButton button) {
         button.setBorder(BorderFactory.createLoweredBevelBorder());
         button.setContentAreaFilled(false);
     }
@@ -139,9 +138,12 @@ class HistoryAction extends AFreeplaneAction {
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 
-        JButton lastButton = createButton("openFile", gbl, gbc);
-        while (actorIterator.hasNext())
-            lastButton = createButton(actorIterator.next().getSimpleDescription(), gbl, gbc);
+        JButton lastButton = createButton("openFile", gbl, gbc, buttons++);
+        panel.add(lastButton);
+        while (actorIterator.hasNext()) {
+            lastButton = createButton(actorIterator.next().getSimpleDescription(), gbl, gbc, buttons++);
+            panel.add(lastButton);
+        }
         gbc.weighty = 1;
         gbl.setConstraints(lastButton, gbc);
 
@@ -159,18 +161,17 @@ class HistoryAction extends AFreeplaneAction {
         buttons_before = buttons;
     }
 
-    private JButton createButton(String title, GridBagLayout gbl, GridBagConstraints gbc) {
+    public JButton createButton(String title, GridBagLayout gbl, GridBagConstraints gbc, int num) {
         if (title.isEmpty())
             return null;
         JButton button = new JButton(title);
         button.setFocusPainted(false);
         button.setHorizontalAlignment(SwingConstants.LEFT);
         button.setHorizontalTextPosition(SwingConstants.LEFT);
-        gbc.gridy = buttons;
+        gbc.gridy = num;
         gbl.setConstraints(button, gbc);
         button.setMargin(new Insets(0, 0, 0, 0));
-        panel.add(button);
-        final int buttonIndex = buttons++;
+        final int buttonIndex = num;
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 buttonPressed(buttonIndex);
