@@ -98,7 +98,7 @@ public class HistoryAction extends AFreeplaneAction {
         }
         }
 
-    private void buttonPressed(int index) {
+    private static void buttonPressed(int index) {
         int currentIndex = buttons - 1 - redos;
         if (index == currentIndex)
             return;
@@ -116,7 +116,7 @@ public class HistoryAction extends AFreeplaneAction {
         button.setContentAreaFilled(false);
     }
 
-    public void update() {
+    public static void update() {
         if (panel == null)
             return;
         if(undoHandler == null) {
@@ -161,7 +161,7 @@ public class HistoryAction extends AFreeplaneAction {
         buttons_before = buttons;
     }
 
-    public JButton createButton(String title, GridBagLayout gbl, GridBagConstraints gbc, int num) {
+    public static JButton createButton(String title, GridBagLayout gbl, GridBagConstraints gbc, int num) {
         if (title.isEmpty())
             return null;
         JButton button = new JButton(title);

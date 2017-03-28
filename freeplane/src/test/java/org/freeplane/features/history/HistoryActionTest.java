@@ -11,8 +11,6 @@ public class HistoryActionTest {
 
     @Test
     public void checkSetButtonUndo() {
-        HistoryAction historyAction = new HistoryAction();
-
         GridBagLayout gbl = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -20,7 +18,7 @@ public class HistoryActionTest {
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 
-        JButton button = historyAction.createButton("testButton", gbl, gbc, 0);
+        JButton button = HistoryAction.createButton("testButton", gbl, gbc, 0);
         HistoryAction.setButtonUndo(button);
 
         assertFalse(button.isContentAreaFilled());
