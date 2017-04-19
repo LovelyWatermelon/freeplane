@@ -29,10 +29,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DateFormatSymbols;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
+import java.util.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -144,6 +141,7 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener, 
 	protected JPanel weekPanel;
 	protected JButton[] weeks;
 	protected JYearChooser yearChooser = null;
+    protected ArrayList<Date> reminderDays = new ArrayList<>();
 
 	/**
 	 * Default JDayChooser constructor.
@@ -317,15 +315,35 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener, 
 		Date day = tmpCalendar.getTime();
 		int n = 0;
 		final Color foregroundColor = getForeground();
+        //System.out.println("Update");
 		while (day.before(firstDayInNextMonth)) {
 			days[i + n + 7].setText(Integer.toString(n + 1));
-			days[i + n + 7].setVisible(true);
-			if ((tmpCalendar.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR))
+            days[i + n + 7].setVisible(true);
+            System.out.println(tmpCalendar.get(Calendar.DAY_OF_YEAR));
+            System.out.println(tmpCalendar.getTime());
+            if ((tmpCalendar.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR))
 			        && (tmpCalendar.get(Calendar.YEAR) == today.get(Calendar.YEAR))) {
 				days[i + n + 7].setForeground(sundayForeground);
 			}
 			else {
-				days[i + n + 7].setForeground(foregroundColor);
+                boolean colorSet = false;
+                Calendar cal = Calendar.getInstance();
+                for(Date date : reminderDays){
+                    System.out.println(reminderDays);
+                    cal.setTime(date);
+
+                    //tmpCalendar.add(Calendar.MONTH, 1);
+                    if ((tmpCalendar.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR))
+                            && (tmpCalendar.get(Calendar.YEAR) == cal.get(Calendar.YEAR))) {
+                        System.out.println("TEST");
+                        days[i + n + 7].setForeground(sundayForeground);
+                        colorSet = true;
+                        break;
+                    }
+                }
+                if (!colorSet) {
+                    days[i + n + 7].setForeground(foregroundColor);
+                }
 			}
 			if ((n + 1) == this.day) {
 				days[i + n + 7].setBackground(selectedColor);
@@ -350,6 +368,7 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener, 
 		}
 		drawWeeks();
 	}
+
 
 	/**
 	 * Hides and shows the week buttons.
@@ -404,6 +423,10 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener, 
 	public int getDay() {
 		return day;
 	}
+
+	public void setReminderDays(ArrayList<Date> dates) {
+        reminderDays = dates;
+    }
 
 	/**
 	 * Returns the day panel.

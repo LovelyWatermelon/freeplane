@@ -14,10 +14,15 @@
 /* $Id: JTripleCalendar.java,v 1.1.2.2 2007/02/25 21:12:50 christianfoltin Exp $ */
 package org.freeplane.core.ui.components.calendar;
 
+import org.freeplane.features.map.NodeModel;
+import org.freeplane.features.mode.Controller;
+import org.freeplane.view.swing.features.time.mindmapmode.ReminderExtension;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -72,6 +77,23 @@ public class JTripleCalendar extends JPanel implements PropertyChangeListener {
 			dayChooser.setYear(year);
 			dayChooser.setMonth(month);
 			dayChooser.setEnabled(false);
+
+			ArrayList<Date> dates = new ArrayList<>();
+			NodeModel node = Controller.getCurrentController().getMap().getRootNode();
+			getDates(node, dates);
+			dayChooser.setReminderDays(dates);
+		}
+	}
+
+
+	private static void getDates(final NodeModel node, ArrayList<Date> dates) {
+		final ReminderExtension hook = ReminderExtension.getExtension(node);
+		if (hook != null) {
+			Date date = new Date(hook.getRemindUserAt());
+			dates.add(date);
+		}
+		for (final NodeModel child : Controller.getCurrentModeController().getMapController().childrenUnfolded(node)) {
+			getDates(child, dates);
 		}
 	}
 

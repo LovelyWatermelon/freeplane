@@ -56,7 +56,7 @@ public class JTimeChooser extends Box{
 	public JTimeChooser() {
 		super(BoxLayout.X_AXIS);
 		setName("JTimeChooser");
-		hourChooser  = new JSpinField(0, 59);
+		hourChooser  = new JSpinField(0, 23);
 		hourChooser.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent e) {
 				if(e.getPropertyName().equals("value") &&  calendar != null){
